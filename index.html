@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width">
+ <title>Ejemplo de servicio</title>
+</head>
+
+<body>
+ <h1>Ejemplo de servicio</h1>
+
+ <button onclick="ejecuta()">Ejecuta</button>
+
+ <script>
+  async function ejecuta() {
+   try {
+    const resp = await fetch("servicio.php")
+    if (resp.ok) {
+     const datos = await resp.json() // <-- Ahora esperamos un JSON
+     // Mostramos los 3 juegos
+     alert(`Juego 1: ${datos.juego1}\nJuego 2: ${datos.juego2}\nJuego 3: ${datos.juego3}`)
+    } else {
+     throw new Error(resp.statusText)
+    }
+   } catch (error) {
+    console.error(error)
+    alert(error.message)
+   }
+  }
+ </script>
+
+</body>
+</html>
